@@ -1,0 +1,42 @@
+services:
+  opencode:
+    image: coderluii/holycode:1.2.5
+    container_name: opencode-agent
+    restart: unless-stopped
+    depends_on:
+      - deepseek-bridge
+    volumes:
+      - ./workspace:/workspace
+      - ./workspace/opencode.json:/home/opencode/.config/opencode/opencode.json
+    working_dir: /workspace
+    networks:
+      - agent-net
+
+  deepseek-bridge:
+    build:
+      context: ./bridge
+      dockerfile: Dockerfile
+    container_name: deepseek-bridge
+    restart: unless-stopped
+    env_file:
+      - ./bridge/.env
+    ports:
+      - "127.0.0.1:6080:6080"   # noVNC — доступен только с вашего Mac
+      - "127.0.0.1:5900:5900"   # VNC — на случай нативного клиента
+    volumes:
+      # Сессия Playwright/Chromium сохраняется на вашем Mac
+      - ./bridge/session:/app/session
+      - ./workspace:/workspace
+    environment:
+      - SERVER_INTERACTIVE_LOGIN=0
+      - DISPLAY=:99
+      - VNC_PASSWORD=password
+      - HOST=0.0.0.0
+      - ENABLE_VNC=1    # <-- VNC выключен по умолчанию, включить для создания новой сессии
+      - RESOLUTION=1280x800x24
+    networks:
+      - agent-net
+
+networks:
+  agent-net:
+    driver: bridge
