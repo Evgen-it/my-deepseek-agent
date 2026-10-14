@@ -1,4 +1,3 @@
-Continue  docker compose exec opencode opencode -s ses_ed8492d84ffeBft6vtayoPddDp
 
 # 🤖 my-deepseek-agent
 
@@ -49,6 +48,7 @@ Continue  docker compose exec opencode opencode -s ses_ed8492d84ffeBft6vtayoPddD
 my-deepseek-agent/
 ├── docker-compose.yml
 ├── README.md
+├── git-config/                  # конфиг и кред для гита
 ├── bridge/                      # Код моста opencode-deepseek
 │   ├── Dockerfile               # Образ моста (Python + Playwright + VNC)
 │   ├── start.sh                 # Entrypoint: Xvfb + x11vnc + noVNC + мост
@@ -63,6 +63,11 @@ my-deepseek-agent/
 ```
 
 ## 🚀 Быстрый старт
+
+### 0. Настройка Git
+
+Схема такая: инициализация и ветки — вручную на Mac, токен и .gitconfig — в отдельной папке git-config/, которая монтируется в контейнер
+Нужно создать и заполнить .gitconfig и .git-credentials из приложенных Example's
 
 ### 1. Первый запуск (создание сессии)
 
@@ -202,15 +207,15 @@ VNC_PASSWORD=password
 - [x] Реализовать условный запуск VNC через `ENABLE_VNC`
 - [x] Написать глобальный промпт агента
 - [+] Отладить permission-паттерны (инвертированная логика с `"*": allow`)
-- [ ] Проверить работу агента без VNC на реальной задаче
+- [+] Проверить работу агента без VNC на реальной задаче
 
 ### Развитие агента
 
-- [ ] Включить git-блок в `deepseek.md` (расширенные permission + правила git-flow)
-- [ ] Настроить remote GitHub в `workspace/dtw-traing/` (вручную)
-- [ ] Научить агента пушить в ветку `agent/<task-name>` (с обязательным подтверждением)
+- [+] Включить git-блок в `deepseek.md` (расширенные permission + правила git-flow)
+- [+] Настроить remote GitHub в `workspace/.../` (вручную)
+- [+] Научить агента пушить в ветку `agent/<task-name>` (с обязательным подтверждением)
 - [ ] Добавить pre-commit hook с линтером
-- [ ] Протестировать сценарий «сессия слетела» → перелогин через VNC
+- [+] Протестировать сценарий «сессия слетела» → перелогин через VNC
 
 ### Оптимизация
 
@@ -218,6 +223,8 @@ VNC_PASSWORD=password
 - [ ] Рассмотреть замену XFCE на Openbox (~50 МБ вместо ~300 МБ)
 - [ ] Рассмотреть вынос VNC в отдельный «auth-only» образ
 - [ ] Настроить авто-бэкап `bridge/session/` (чтобы не логиниться заново)
+- [ ] сократить точки монтирования до минимума 
+- [ ] рассмотреть докер файлы с точки зрения Best-Practics
 
 ### Документация
 

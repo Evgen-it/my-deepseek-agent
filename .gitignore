@@ -5,8 +5,12 @@
 bridge/session/
 bridge/session/*
 
-# Локальные конфиг (есть пример)
+# Локальные конфиги (есть примеры)
 workspace/.opencode/agent/deepseek.md
+git-config/.git-credentials
+git-config/.gitconfig
+
+# Проект
 workspace/CCPS/
 workspace/CCPS/*
 
