@@ -1,0 +1,7 @@
+[user]
+    name = .........
+    email = ........
+[credential]
+    helper = store
+[safe]
+    directory = /workspace/CCPS

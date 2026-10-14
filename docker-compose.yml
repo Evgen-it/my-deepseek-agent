@@ -8,6 +8,8 @@ services:
     volumes:
       - ./workspace:/workspace
       - ./workspace/opencode.json:/home/opencode/.config/opencode/opencode.json
+      - ./git-config/.gitconfig:/root/.gitconfig
+      - ./git-config/.git-credentials:/root/.git-credentials
     working_dir: /workspace
     networks:
       - agent-net
