@@ -4,11 +4,14 @@
 # Сессия DeepSeek и данные моста (важно! не выкладывать)
 bridge/session/
 bridge/session/*
+session/
+session/*
 
 # Локальные конфиги (есть примеры)
-workspace/.opencode/agent/deepseek.md
-git-config/.git-credentials
-git-config/.gitconfig
+workspace/.opencode/
+configs/git-config/.git-credentials
+configs/git-config/.gitconfig
+configs/agent/deepseek.md
 
 # Проект
 workspace/CCPS/

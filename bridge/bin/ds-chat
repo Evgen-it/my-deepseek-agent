@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Launch DeepSeek terminal chat from anywhere.
+# Install once:  mkdir -p ~/bin && ln -sf "$(pwd)/bin/ds-chat" ~/bin/ds-chat
+# (ensure ~/bin is on PATH, or add: alias ds-chat='~/bin/ds-chat')
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+exec "$ROOT/ds" "$@"
