@@ -36,12 +36,29 @@ services:
     networks:
       - agent-net
 
+  compat-proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: compat-proxy
+    restart: unless-stopped
+    depends_on:
+      - deepseek-bridge
+    environment:
+      # Прокси будет перенаправлять запросы в мост по внутренней сети Docker
+      - UPSTREAM_URL=http://deepseek-bridge:8000
+      - PROXY_HOST=0.0.0.0
+      - PROXY_PORT=9526
+    networks:
+      - agent-net
+    # Порт НЕ публикуем наружу — прокси нужен только контейнеру opencode
+
   opencode:
     image: coderluii/holycode:1.2.5
     container_name: opencode-agent
     restart: unless-stopped
     depends_on:
-      - deepseek-bridge
+      - compat-proxy
     volumes:
       - ./workspace:/workspace
       - ./configs:/root/.config/opencode   # <-- ОДНА точка
