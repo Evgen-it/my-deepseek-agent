@@ -4,11 +4,12 @@
 
 ## 📖 Что это
 
-Проект разворачивает **три контейнера**, которые вместе образуют полноценного AI-агента для разработки:
+Проект разворачивает **четыре контейнера**, которые вместе образуют полноценного AI-агента для разработки:
 
 - **`opencode`** — сам AI-агент (TUI), умеет читать/писать файлы, запускать команды, работать с git.
 - **`deepseek-bridge`** — лёгкий рабочий мост-переходник [`opencode-deepseek`](https://github.com/Tsuev/opencode-deepseek), который эмулирует OpenAI-совместимый API поверх бесплатного веб-чата DeepSeek. Работает в headless-режиме, **без VNC и графики**.
 - **`deepseek-auth`** — одноразовый контейнер только для авторизации: Openbox + VNC + Playwright. Запускается при `./start.sh`, ждёт логина, сохраняет сессию в общий volume и **автоматически завершается**.
+- **`compat-proxy`** — Прокси для ремонта парсинга <｜DSML｜tool_calls>.
 
 Агент работает **только внутри папки `/workspace`** и не имеет доступа к остальной системе Mac. Авторизация в DeepSeek выполняется через VNC-слой auth-контейнера; после этого мост использует сохранённую сессию в headless-режиме.
 
@@ -266,6 +267,7 @@ python3 -m venv .venv
 - [OpenCode](https://opencode.ai) — сам агент
 - [`opencode-deepseek`](https://github.com/Tsuev/opencode-deepseek) — мост
 - [HolyCode](https://github.com/CoderLuii/HolyCode) — базовый Docker-образ для opencode
+- [OpenCode Compatibility Proxy](https://github.com/ladiossoop5star/opencode_compat_proxy) — Прокси для <｜DSML｜tool_calls>
 - [Docker Compose](https://docs.docker.com/compose/) — официальная документация
 
 ---

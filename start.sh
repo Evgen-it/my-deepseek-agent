@@ -58,7 +58,7 @@ fi
 # 6. Успех — оставляем auth в exited-состоянии, чтобы depends_on работал
 echo "✅ Сессия DeepSeek сохранена."
 echo "🚀 Запускаю рабочие контейнеры..."
-docker compose -f "$COMPOSE_FILE" up -d "$BRIDGE_SERVICE" opencode
+docker compose -f "$COMPOSE_FILE" up -d "$BRIDGE_SERVICE" compat-proxy opencode
 
 echo ""
 echo "✨ Готово. Запуск агента:"
